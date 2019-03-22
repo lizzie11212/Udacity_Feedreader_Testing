@@ -90,6 +90,19 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+
+         beforeEach(function(done){
+           // Anything inside this block executes before
+           // each spec (it) inside this describe.
+           loadFeed(0,done);
+         });
+
+         it ('has at least one entry in feed container', function(){
+           let container = document.querySelector('.feed');
+           let entries = container.querySelectorAll('.entry');
+           expect(entries.length).toBeGreaterThan(0);
+         });
+
     });
     /* TODO: Write a new test suite named "New Feed Selection" */
 
