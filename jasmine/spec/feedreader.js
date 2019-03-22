@@ -112,5 +112,23 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-    });     
+         let feed1;
+         let feed2;
+
+         beforeEach(function(done){
+           loadFeed(1, function(){
+             feed1 = document.querySelector('.feed').innerHTML;
+             loadFeed(2, function(){
+               feed2 = document.querySelector('.feed').innerHTML;
+               done();
+             });
+           });
+         })
+
+         it('new feed is loaded and the content changes', function(){
+           expect(feed1).toBeDefined();
+           expect(feed2).toBeDefined();
+           expect(feed1).not.toBe(feed2);
+         });
+    });
 }());
