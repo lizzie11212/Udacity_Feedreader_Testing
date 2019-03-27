@@ -1,7 +1,27 @@
+/* feedreader.js
+ *
+ * This is the spec file that Jasmine will read and contains
+ * all of the tests that will be run against your application.
+ */
+
+/* We're placing all of our tests within the $() function,
+ * since some of these tests may require DOM elements. We want
+ * to ensure they don't run until the DOM is ready.
+ */
+
 $(function(){
-
+    /* This is our first test suite - a test suite just contains
+     * a related set of tests. This suite is all about the RSS
+     * feeds definitions, the allFeeds variable in our application.
+     */
     describe('RSS Feeds', () => {
-
+      /* This is our first test - it tests to make sure that the
+       * allFeeds variable has been defined and that it is not
+       * empty. Experiment with this before you get started on
+       * the rest of this project. What happens when you change
+       * allFeeds in app.js to be an empty array and refresh the
+       * page?
+       */
         it('are defined', () => {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
@@ -35,16 +55,19 @@ $(function(){
 
           it('changes visibility when icon is clicked', () => {
               let menuIcon = $('.menu-icon-link');
+              let menuBody = $('body');
               menuIcon.click();
-              expect($('body').hasClass('menu-hidden')).toBeFalsy();
+              expect(menuBody.hasClass('menu-hidden')).toBeFalsy();
               menuIcon.click();
-              expect($('body').hasClass('menu-hidden')).toBeTruthy();
+              expect(menuBody.hasClass('menu-hidden')).toBeTruthy();
           });
     });
 
     describe('Initial Entries', () => {
 
          beforeEach( (done) => {
+           // Anything inside this block executes before
+           // each spec (it) inside this describe.
            loadFeed(0,done);
          });
 
